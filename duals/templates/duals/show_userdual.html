@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load  staticfiles %}
+{% block content %}
+
+  <div align="center" class="container pt">
+  	<div align="left"><font color="#02DF82"> {{warning_message}}</font></div>
+  	<br/>
+	<div>
+	<table border="1">
+	<tr>
+	<td>双选会名称</td>
+	<td>省份</td>
+	<td>主办高校/机构</td>
+	<td>报名截止日期</td>
+	<td>举办日期</td>
+	<td>举办地址</td>
+	<td>状态</td>
+	<td>参加人</td>
+	<td>备注</td>
+	<td>修改</td>
+	</tr>
+	{% for m in mes%}
+		<tr> 
+			<td><a href="{{m.dual.url_adress}}" target="_black">{{m.dual.name}}</a></td>
+			<td>{{m.dual.provience }}</td>
+			<td>{{m.dual.school }}</td>
+			<td>{{m.dual.deadline|date:"Y-m-d" }}</td>
+			<td>{{m.dual.preferred_date|date:"Y-m-d H:i:s"}}</td>
+			<td>{{m.dual.address}}</td>
+			<td>{% if m.dual_status %}{{m.get_dual_status_display}}{%else%}{%endif%}</td>
+			<td>{%if m.person_attend%}{{m.person_attend}}{%else%}{%endif%}</td>
+			<td>{%if m.comment%}{{m.comment}}{%else%}{%endif%}</td>
+			<td><a href='/duals/user_dual/{{m.id}}'>修改</a></td>
+		</tr>
+	{%endfor%}
+	</table>
+
+	</div>
+	
+	
+
+	<div class="pagination">
+    	<span class="step-links">
+        	{% if mes.has_previous %}
+           		<a href="?page={{ mes.previous_page_number }}">previous</a>
+        	{% endif %}
+ 
+        	<span class="current">
+           	 	Page {{ mes.number }} of {{ mes.paginator.num_pages }}.
+        	</span>
+ 
+        	{% if mes.has_next %}
+            	<a href="?page={{ mes.next_page_number }}">next</a>
+        	{% endif %}
+    	</span>
+	</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load  staticfiles %}
+{% block content %}
+	<div class="container pt">
+		<p>请选择意向工作地点</p>
+		{% for pos in position %}
+			{% for pp in pos.pro.all %}
+					<a href="{{pp.id}}">{{pp}}</a><br/>
+			{% endfor %}
+		{% endfor %}
+	</div>
+{% endblock %}

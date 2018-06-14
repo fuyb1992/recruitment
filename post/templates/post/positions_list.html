@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load  staticfiles %}
+{% block content %}
+
+  <div align="center"  class="container" >
+    <script type="text/javascript">
+        var ua = navigator.userAgent;
+        var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+            isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+            isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+            isMobile = isIphone || isAndroid;
+            if(isMobile) {
+              document.write("<p>为保证网页显示效果，请您横屏查看本网页</p>");
+            }
+    </script>
+  	<div ><p> 招聘岗位</p></div>
+	<div align="left" class="col-lg-10">
+	<table class="table table-striped table-bordered">
+	<tr>
+	<th>岗位名称</th>
+	<th>岗位类别</th>
+	<th>招聘部门</th>
+	<th>工作地点</th>
+	<th>月薪范围（元）</th>
+	<th>年薪范围（元）</th>
+	<th>岗位要求</th>
+	<th>岗位描述</th>
+	<th>招聘人数</th>
+	<th>岗位性质</th>
+	<th>更新时间</th>
+	<th>投递简历</th>
+	</tr>
+	{% for m in mes%}
+		<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+			<td>{{m.name}}</td>
+			<td>{{m.category}}</td>
+			<td>{{m.getdep}}</td>
+			<td>{{m.getpro }}</td>
+			<td>{{m.position_monthly_salary_down |intcomma:False}}--{{m.position_monthly_salary_up |intcomma:False}}</td>
+			<td>{{m.position_annual_salay_down |intcomma:False}}--{{m.position_annual_salay_up |intcomma:False}}</td>
+			<td>{{m.position_requirements}}</td>
+			<td>{{m.position_statement}}</td>
+			<td>{{m.recruiting_numbers }}</td>
+			<td>{{m.get_property_display}}
+			<td>{{m.update_date|date:"Y-m-d H:i:s"}}</td>
+			<td><a href="{{m.id}}"  target="_black">投递</a></td>
+		</tr>
+	{%endfor%}
+	</table>
+	</div>
+	<div class="col-lg-2">
+		<p><font size=2>按照岗位性质筛选</font></p>
+			<a href="category={{cat}}property=d">全部</a><br/>
+			<a href="category={{cat}}property=a">全职</a><br/>
+			<a href="category={{cat}}property=b">兼职</a><br/>
+			<a href="category={{cat}}property=c">实习</a><br/>
+		<p></p>
+		<p><font size=2>按照岗位类别筛选</font></p>
+			<a href="category=100property={{pro}}">全部</a><br/>
+			{% for p in pc %}
+				<a href="category={{p.id}}property={{pro}}">{{p.name}}</a><br/>
+			{% endfor %}
+
+	</div>
+	<div class="pagination">
+    	<span class="step-links">
+        	{% if mes.has_previous %}
+           		<a href="?page={{ mes.previous_page_number }}">上一页</a>
+        	{% endif %}
+
+        	<span class="current">
+           	 	第{{ mes.number }}页  共{{ mes.paginator.num_pages }}页.
+        	</span>
+
+        	{% if mes.has_next %}
+            	<a href="?page={{ mes.next_page_number }}">下一页</a>
+        	{% endif %}
+    	</span>
+	</div>
+  </div>
+{% endblock %}

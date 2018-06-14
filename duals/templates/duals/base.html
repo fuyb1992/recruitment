@@ -1,0 +1,93 @@
+{% load  staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>国航员工服务中心线上服务系统 </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static "js/hover.zoom.js" %}"></script>
+    <script src="{% static "js/hover.zoom.conf.js" %}"></script>
+    <link rel="shortcut icon" href="{% static "media/favicon.ico" %} ">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style type-'text/css'>
+        body{margin:0 padding:0;}
+        #left{width:90%;min-height:200px;float:left;}
+        #right{width:10%;min-height:200px;background-color:#EEEEEE;float:left;}
+    </style>
+  </head>
+    <body>
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/duals">国航员工服务中心线上服务系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/duals/login">{% if user.is_authenticated %}你好, {{ user.username }}{% else %} 登录 {% endif %}</a></li>
+            <li><a href="/duals/logout">登出</a></li>
+            <li><a href="/duals/change_pass">修改密码</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  {% block content %}{% endblock %}
+  <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>国航员工服务中心</h4>
+                    <p>
+                        国航总部大楼西段<br/>
+                        010-61463333 <br/>
+                        前台
+                    </p>
+                </div><!-- /col-lg-4 -->
+                
+                <div class="col-lg-4">
+                    <h4>友情链接</h4>
+                    <p>
+                        <a href="http://intranet.airchina.com.cn">国航门户</a><br/>
+                    </p>
+                </div><!-- /col-lg-4 -->
+                
+                <div class="col-lg-4">
+                    <h4>关于员服</h4>
+                    <p>国航员工服务中心为集团和公司员工提供人事行政类、商务类、综合保障类和财务类服务，共计97项服务内容，详细业务流程可电话咨询前台。</p>
+                </div><!-- /col-lg-4 -->
+            
+            </div>
+        
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+  </body>
+</html>

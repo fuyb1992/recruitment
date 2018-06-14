@@ -1,0 +1,8 @@
+django=1.11.7
+django-autocomplete-light
+django-import-export
+six
+pillow
+django-crequest
+regex
+reportlab

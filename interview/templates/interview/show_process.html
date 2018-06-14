@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load  staticfiles %}
+
+{% block content %}
+
+  <div class="main">
+	<div id="step"></div>
+  </div>
+ <script type="text/javascript">
+	var $step = $("#step");
+	var $index = $("#index");
+
+	$step.step({
+		index: {{status}},
+		time: 500,
+		title: ["账号注册", "简历填写", "预约面试", "面试结果评估", "发放offer"]
+	});
+</script>
+
+{% endblock %}
