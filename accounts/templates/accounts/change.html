@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load  staticfiles %}
+{% block content %}
+  <div align="center" class="container pt">
+	<form class="form-horizontal" id = "form" action="{{path}}" method="post">
+                {% csrf_token %}
+                
+      
+                <div class="form-group {%if form.password.errors%} has-error {%endif%}">
+                  <label for="pssword" class="col-sm-4 control-label">新密码*:</label>
+                  <div class="col-sm-5">
+                    {{form.password}}
+                  </div>
+                  {%if form.password.errors%}
+                  <div class="col-sm-5 col-sm-offset-4 margint10">
+                  <span class="color-background2 ">
+                  {% for error in form.password.errors %}
+                    {{ error|escape }}
+                  {% endfor %}
+                  </span>
+                  </div>
+                  {%endif%}
+                </div>
+                <div class="form-group {%if form.password2.errors%} has-error {%endif%}">
+                  <label for="pssword2" class="col-sm-4 control-label">确认新密码*:</label>
+                  <div class="col-sm-5">
+                    {{form.confirm_password}}
+                  </div>
+                  {%if form.confirm_password.errors%}
+                  <div class="col-sm-5 col-sm-offset-4 margint10">
+                  <span class="color-background2 ">
+                  {% for error in form.confirm_password.errors %}
+                    {{ error|escape }}
+                  {% endfor %}
+                  </span>
+                  </div>
+                  {%endif%}
+                </div>
+
+                <div class="form-group margint30">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">确认</button>
+                  </div>
+                </div>
+               </form>
+  </div>
+{% endblock %}

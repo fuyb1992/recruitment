@@ -1,0 +1,54 @@
+﻿{% extends "base.html" %}
+{% load  staticfiles %}
+{% block content %}
+
+  <div align="center" class="container pt">
+    <form class="form-horizontal" id = "form" action="./?next={{redirect_to}}" method="post">
+                {% csrf_token %}
+                        
+                        
+                  <div>
+                    <label >用户名* :</label>
+                    <div>
+                    {{form.username}}
+                    </div>
+                    {%if form.username.errors%}
+                      <div>
+                        <span>
+                        {% for error in form.username.errors %}
+                          {{ error|escape }}
+                        {% endfor %}
+                        </span>
+                      </div>
+                    {%endif%}
+                 </div>
+                
+                <div>
+                  <label>密码*:</label>
+                  <div>
+                    {{form.password}}
+                  </div>
+                  {%if form.password.errors%}
+                  <div>
+                    <span>
+                    {% for error in form.password.errors %}
+                      {{ error|escape }}
+                    {% endfor %}
+                    </span>
+                  </div>
+                  {%endif%}
+                </div>
+                
+
+                <div>
+                  <div>
+                    <button type="submit">确认</button>
+                    <a href="{% url 'accounts:forget_password' %}"><span>忘记密码</span></a>
+                  </div>
+                </div>
+                <div>
+                  {{login_errors}}
+                </div>
+               </form>
+  </div>
+{% endblock %}
